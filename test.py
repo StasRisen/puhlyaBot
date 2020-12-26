@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
-import subprocess
+import requests
+import sys
+url = 'http://wttr.in'
 
-command = 'curl wttr.in'
+res = requests.get(url)
 
-two = subprocess.check_output(command).decode('utf-8')
-str = two[90:127]
-print( str)
+temp = res.content.decode('utf-8')
+
+
+
+#str = two[90:127]
+print(temp[:30])
+print(temp[158:160] + '..' +temp[177:179] + '°')
