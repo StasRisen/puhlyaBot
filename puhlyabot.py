@@ -1,5 +1,5 @@
 import telebot
-import requests
+import subprocess
 
 bot = telebot.TeleBot("1308961991:AAFMZ1dV0ODPJhahmWU9n9Rt2HWH-z_f7XU")
 
@@ -12,9 +12,10 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['weather'])
 def send_weather(message):
-	url = 'http://wttr.in'
-	res = requests.get(url)
-	temp = res.content.decode('utf-8')
-	bot.reply_to(message, temp[:30] + '\n' + temp[158:160] + '..' +temp[177:179] + '°')
+	temp = subprocess.check_output('curl -s wttr.in/{Ulyanovsk,Moscow}?format=3')
+	temp = temp.decode('utf-8')
+
+	bot.reply_to(message, temp)
+
 
 bot.polling()
