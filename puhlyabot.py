@@ -12,7 +12,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['weather'])
 def send_weather(message):
-	temp = subprocess.check_output('curl -s wttr.in/{Ulyanovsk,Moscow}?format=3')
+	temp = subprocess.check_output('curl -s http://wttr.in/{Ulyanovsk,Moscow}?format=3')
 	bot.reply_to(message, temp)
 	print(temp)
 
